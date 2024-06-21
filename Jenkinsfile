@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sshagent(['ec2-ssh-credentials-id']) {
-                    sh 'ansible-playbook -i "54.190.39.54," -u ubuntu --private-key /home/fernando/Desktop/devops-keypair.pem deploy_nginx.yml'
+                    sh 'ansible-playbook -i hosts -u ubuntu --private-key /home/fernando/Desktop/devops-keypair.pem deploy_nginx.yml'
                 }
             }
         }
