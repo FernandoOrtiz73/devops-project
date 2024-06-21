@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sshagent(['ec2-ssh-credentials-id']) {
-                    sh 'ansible-playbook -i hosts deploy_nginx.yml'
+                    sh 'ansible-playbook deploy_nginx.yml'
                 }
             }
         }
