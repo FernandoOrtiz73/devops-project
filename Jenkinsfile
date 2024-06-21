@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git(url: 'https://github.com/FernandoOrtiz73/devops-project.git', credentialsId: 'github-pat')
+                git(url: 'https://github.com/FernandoOrtiz73/devops-project.git', credentialsId: 'github-credentials-id')
             }
         }
         stage('Build Docker Image') {
