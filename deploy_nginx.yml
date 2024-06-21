@@ -1,0 +1,26 @@
+---
+- hosts: web
+  become: true
+  tasks:
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Log in to DockerHub
+      command: docker login -u mecamorfogalvanico238 -p dckr_pat_pBry00Vt2rNG31yinjfUK2XC4r4
+      ignore_errors: yes
+
+    - name: Pull Docker image
+      docker_image:
+        name: mecamorfogalvanico238/devitaly
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: nginx
+        image: mecamorfogalvanico238/devitaly
+        state: started
+        ports:
+          - "80:80"

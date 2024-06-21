@@ -1,0 +1,38 @@
+---
+- hosts: web
+  become: true
+  tasks:
+    - name: Instalar dependencias
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+
+    - name: Añadir la clave GPG oficial de Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Añadir el repositorio Docker
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Actualizar apt-get nuevamente
+      apt:
+        update_cache: yes
+
+    - name: Instalar Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Iniciar y habilitar Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
