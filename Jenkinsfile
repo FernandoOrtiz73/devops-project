@@ -3,12 +3,12 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         EC2_SSH_CREDENTIALS = credentials('ec2-ssh-credentials-id')
-        GITHUB_CREDENTIALS = credentials('github-pat')
+        GITHUB_CREDENTIALS = credentials('github-pat') // Asegúrate de que el ID coincide con el de las credenciales creadas
     }
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-pat', url: 'https://github.com/FernandoOrtiz73/devops-project.git'
+                git(url: 'https://github.com/FernandoOrtiz73/devops-project.git', credentialsId: 'github-pat')
             }
         }
         stage('Build Docker Image') {
