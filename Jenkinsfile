@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sshagent(['ec2-ssh-credentials-id']) {
-                    sh 'ansible-playbook -i hosts deploy_nginx.yml -o "StrictHostKeyChecking=no"'
+                    sh 'ansible-playbook -i '54.190.39.54,' -u ubuntu --private-key /home/fernando/Desktop/devops-keypair.pem deploy_nginx.yml'
                 }
             }
         }
